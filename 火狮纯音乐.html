@@ -1,0 +1,202 @@
+<!--火狮 H.S.T. 警告! 禁止搬运和复制该网站的任何代码。-->
+
+<!--H.S.T. Warning! It is prohibited to move and copy any code of this website.-->
+
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://github.com/Xiaowameijiao/huoshiicon.github.io/blob/main/huoshiicon.jpg?raw=true">
+    <title>火狮纯音乐</title>
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.ibb.co/ZcCZ7KC/IMG-20240601-185646.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-color: black; 
+    z-index: -1;
+    animation: zoomEffect 50s infinite alternate;
+}
+
+@keyframes zoomEffect {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1); 
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#music-buttons {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    transition: opacity 0.5s;
+}
+
+.music-button {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.416);
+    cursor: pointer;
+    color: #04d066d4;
+    border-radius: 5px;
+}
+
+#audio-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #04d066d4;
+    padding: 10px;
+    text-align: center;
+    z-index: 1;
+    transition: opacity 0.5s;
+}
+
+#audio-controls button {
+    background-color: #0000005f;
+    border: none;
+    padding: 10px;
+    color: #04d066d4;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#audio-controls input[type="range"] {
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.hidden {
+    opacity: 0;
+}
+.fixed-text {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    color: #008200;
+    margin: 5px; 
+}
+</style>
+</head>
+<body>
+
+<div class="background"></div>
+<div id="music-buttons">    
+    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/husohiyinyue.github.io/%E7%BE%BD%E8%82%BFWindyHill.mp3')">Windy Hill</div>
+    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue5.github.io/CollapsingWorld.mp3')">Collapsing World</div>
+    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue3.github.io/seredrisDaylight.mp3')">seredris - Daylight </div>
+    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/music/NightCruising.m4a')">Night Cruising 夜间巡航</div>
+    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue1.github.io/%E6%AF%8F%E5%BD%93%E6%88%91.mp3')">每当我</div>
+    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue7.github.io/%E5%B9%BB%E6%98%BC.mp3')">幻昼</div>
+    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue2.github.io/TsukisForestMixtape.mp3')"> Tsuki's Forest Mixtape </div>
+</div>
+
+<audio id="audio-player" style="display: none;">
+    您的浏览器不支持音频元素。
+</audio>
+
+<div id="audio-controls">
+    <button onclick="togglePlayPause()">播放/暂停</button>
+    <span id="current-time">0:00</span> - <span id="duration">0:00 -</span> 
+    声音:
+    <input type="range" id="volume" min="0" max="0.5" step="0.1" value="0.5" onchange="adjustVolume(this.value)">
+    <p class="fixed-text">火狮纯音乐 v1.0</p>
+</div>
+
+<script>
+var audioPlayer = document.getElementById('audio-player');
+var currentTimeSpan = document.getElementById('current-time');
+var durationSpan = document.getElementById('duration');
+var musicButtons = document.getElementById('music-buttons');
+var audioControls = document.getElementById('audio-controls');
+var inactivityTimeout;
+
+function playMusic(musicFile) {
+    audioPlayer.src = musicFile;
+    audioPlayer.play();
+}
+
+function togglePlayPause() {
+    if (audioPlayer.paused) {
+        audioPlayer.play();
+    } else {
+        audioPlayer.pause();
+    }
+}
+
+function adjustVolume(volume) {
+    audioPlayer.volume = volume;
+}
+
+audioPlayer.addEventListener('timeupdate', function() {
+    var currentTime = audioPlayer.currentTime;
+    var minutes = Math.floor(currentTime / 60);
+    var seconds = Math.floor(currentTime % 60);
+    var formattedTime = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+    if (!isNaN(audioPlayer.duration)) {
+        var duration = audioPlayer.duration;
+        var totalMinutes = Math.floor(duration / 60);
+        var totalSeconds = Math.floor(duration % 60);
+        var formattedDuration = totalMinutes + ':' + (totalSeconds < 10 ? '0' : '') + totalSeconds;
+
+        currentTimeSpan.textContent = formattedTime;
+        durationSpan.textContent = formattedDuration;
+    } else {
+        currentTimeSpan.textContent = formattedTime;
+        durationSpan.textContent = "0:00";
+    }
+});
+
+function resetInactivityTimeout() {
+    clearTimeout(inactivityTimeout);
+    showControls();
+    inactivityTimeout = setTimeout(hideControls, 5000); // 5秒
+}
+
+function hideControls() {
+    musicButtons.classList.add('hidden');
+    audioControls.classList.add('hidden');
+}
+
+function showControls() {
+    musicButtons.classList.remove('hidden');
+    audioControls.classList.remove('hidden');
+}
+
+document.addEventListener('mousemove', resetInactivityTimeout);
+document.addEventListener('keypress', resetInactivityTimeout);
+
+resetInactivityTimeout();
+</script>
+
+</body>
+</html>
+
+
+
+
