@@ -10,122 +10,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="https://github.com/Xiaowameijiao/huoshiicon.github.io/blob/main/huoshiicon.jpg?raw=true">
     <title>火狮纯音乐</title>
-<style>
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    color: white;
-}
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
 
-.background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://i.ibb.co/ZcCZ7KC/IMG-20240601-185646.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-color: black; 
-    z-index: -1;
-    animation: zoomEffect 50s infinite alternate;
-}
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/ZcCZ7KC/IMG-20240601-185646.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-color: black; 
+            z-index: -1;
+            animation: zoomEffect 50s infinite alternate;
+        }
 
-@keyframes zoomEffect {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1); 
-    }
-    100% {
-        transform: scale(1);
-    }
-}
+        @keyframes zoomEffect {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1); 
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
 
-#music-buttons {
-    position: relative;
-    z-index: 1;
-    padding: 20px;
-    transition: opacity 0.5s;
-}
+        #music-buttons {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            transition: opacity 0.5s;
+            text-align: center;
+        }
 
-.music-button {
-    display: inline-block;
-    padding: 10px;
-    margin: 5px;
-    background-color: rgba(0, 0, 0, 0.416);
-    cursor: pointer;
-    color: #04d066d4;
-    border-radius: 5px;
-}
+        .music-button {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background-color: rgba(0, 0, 0, 0.416);
+            cursor: pointer;
+            color: #04d066d4;
+            border-radius: 5px;
+        }
 
-#audio-controls {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #04d066d4;
-    padding: 10px;
-    text-align: center;
-    z-index: 1;
-    transition: opacity 0.5s;
-}
+        #audio-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #04d066d4;
+            padding: 10px;
+            text-align: center;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-#audio-controls button {
-    background-color: #0000005f;
-    border: none;
-    padding: 10px;
-    color: #04d066d4;
-    border-radius: 5px;
-    cursor: pointer;
-}
+        #audio-controls .control-group {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
 
-#audio-controls input[type="range"] {
-    margin-left: 10px;
-    vertical-align: middle;
-}
+        #audio-controls button {
+            background-color: #0000005f;
+            border: none;
+            padding: 10px;
+            color: #04d066d4;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
 
-.hidden {
-    opacity: 0;
-}
-.fixed-text {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    color: #008200;
-    margin: 5px; 
-}
-</style>
+        #audio-controls input[type="range"] {
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+
+        .fixed-text {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            color: #008200;
+            margin: 5px; 
+        }
+    </style>
 </head>
 <body>
 
 <div class="background"></div>
+
 <div id="music-buttons">    
-    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/husohiyinyue.github.io/%E7%BE%BD%E8%82%BFWindyHill.mp3')">Windy Hill</div>
-    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue5.github.io/CollapsingWorld.mp3')">Collapsing World</div>
-    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue3.github.io/seredrisDaylight.mp3')">seredris - Daylight </div>
-    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/music/NightCruising.m4a')">Night Cruising 夜间巡航</div>
-    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue1.github.io/%E6%AF%8F%E5%BD%93%E6%88%91.mp3')">每当我</div>
-    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue7.github.io/%E5%B9%BB%E6%98%BC.mp3')">幻昼</div>
-    <div class="music-button" onclick="playMusic('https://xiaowameijiao.github.io/huoshiyinyue2.github.io/TsukisForestMixtape.mp3')"> Tsuki's Forest Mixtape </div>
+    <div class="music-button" onclick="playMusic(0)">Windy Hill</div>
+    <div class="music-button" onclick="playMusic(1)">Collapsing World</div>
+    <div class="music-button" onclick="playMusic(2)">seredris - Daylight </div>
+    <div class="music-button" onclick="playMusic(3)">Night Cruising 夜间巡航</div>
+    <div class="music-button" onclick="playMusic(4)">每当我</div>
+    <div class="music-button" onclick="playMusic(5)">幻昼</div>
+    <div class="music-button" onclick="playMusic(6)"> Tsuki's Forest Mixtape </div>
+</div>
+
+<div id="audio-controls">
+    <div class="control-group">
+        <button onclick="togglePlayPause()">播放/暂停</button>
+        <span id="current-time">0:00</span> / <span id="duration">0:00 </span> 
+         - 声音:
+        <input type="range" id="volume" min="0" max="0.5" step="0.1" value="0.5" onchange="adjustVolume(this.value)">
+    </div>
+    <div class="control-group">
+        <label for="music-upload" class="music-button">添加音乐</label>
+        <input type="file" id="music-upload" accept=".mp3, .m4a" style="display: none;" onchange="handleFileUpload(this.files)">
+    </div>
+    <div class="control-group">
+        <button onclick="toggleFullscreen()">全屏</button>
+    </div>
+    <p class="fixed-text">火狮纯音乐 v2.0</p>
 </div>
 
 <audio id="audio-player" style="display: none;">
     您的浏览器不支持音频元素。
 </audio>
-
-<div id="audio-controls">
-    <button onclick="togglePlayPause()">播放/暂停</button>
-    <span id="current-time">0:00</span> - <span id="duration">0:00 -</span> 
-    声音:
-    <input type="range" id="volume" min="0" max="0.5" step="0.1" value="0.5" onchange="adjustVolume(this.value)">
-    <p class="fixed-text">火狮纯音乐 v1.0</p>
-</div>
 
 <script>
 var audioPlayer = document.getElementById('audio-player');
@@ -135,8 +156,20 @@ var musicButtons = document.getElementById('music-buttons');
 var audioControls = document.getElementById('audio-controls');
 var inactivityTimeout;
 
-function playMusic(musicFile) {
-    audioPlayer.src = musicFile;
+var playlist = [
+    'https://xiaowameijiao.github.io/husohiyinyue.github.io/%E7%BE%BD%E8%82%BFWindyHill.mp3',
+    'https://xiaowameijiao.github.io/huoshiyinyue5.github.io/CollapsingWorld.mp3',
+    'https://xiaowameijiao.github.io/huoshiyinyue3.github.io/seredrisDaylight.mp3',
+    'https://xiaowameijiao.github.io/music/NightCruising.m4a',
+    'https://xiaowameijiao.github.io/huoshiyinyue1.github.io/%E6%AF%8F%E5%BD%93%E6%88%91.mp3',
+    'https://xiaowameijiao.github.io/huoshiyinyue7.github.io/%E5%B9%BB%E6%98%BC.mp3',
+    'https://xiaowameijiao.github.io/huoshiyinyue2.github.io/TsukisForestMixtape.mp3'
+];
+var currentSongIndex = 0;
+
+function playMusic(index) {
+    currentSongIndex = index;
+    audioPlayer.src = playlist[currentSongIndex];
     audioPlayer.play();
 }
 
@@ -150,6 +183,35 @@ function togglePlayPause() {
 
 function adjustVolume(volume) {
     audioPlayer.volume = volume;
+}
+
+function handleFileUpload(files) {
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const url = URL.createObjectURL(file);
+        const fileName = file.name;
+
+        addToPlaylist(fileName, url);
+    }
+}
+
+function addToPlaylist(name, url) {
+    const newButton = document.createElement('div');
+    newButton.classList.add('music-button');
+    newButton.textContent = name;
+    newButton.addEventListener('click', function() {
+        playCustomMusic(url);
+    });
+
+    musicButtons.appendChild(newButton); // 添加到现有按钮之后
+
+    playlist.push(url);
+}
+
+function playCustomMusic(url) {
+    currentSongIndex = playlist.indexOf(url); // 更新当前索引为新添加音乐的索引
+    audioPlayer.src = url;
+    audioPlayer.play();
 }
 
 audioPlayer.addEventListener('timeupdate', function() {
@@ -172,6 +234,39 @@ audioPlayer.addEventListener('timeupdate', function() {
     }
 });
 
+audioPlayer.addEventListener('ended', function() {
+    currentSongIndex++;
+    if (currentSongIndex >= playlist.length) {
+        currentSongIndex = 0; // 循环播放回到第一首歌
+    }
+    playMusic(currentSongIndex);
+});
+
+function toggleFullscreen() {
+    var element = document.documentElement;
+    if (!document.fullscreenElement) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) { 
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) { 
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) { 
+            element.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { 
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { 
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { 
+            document.msExitFullscreen();
+        }
+    }
+}
+
 function resetInactivityTimeout() {
     clearTimeout(inactivityTimeout);
     showControls();
@@ -193,7 +288,6 @@ document.addEventListener('keypress', resetInactivityTimeout);
 
 resetInactivityTimeout();
 </script>
-
 </body>
 </html>
 
