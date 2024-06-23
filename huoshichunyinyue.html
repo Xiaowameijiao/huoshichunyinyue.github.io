@@ -11,13 +11,22 @@
     <link rel="icon" type="image/x-icon" href="https://github.com/Xiaowameijiao/huoshiicon.github.io/blob/main/huoshiicon.jpg?raw=true">
     <title>火狮纯音乐</title>
     <style>
-        body, html {
+        body, html, a, button, input, select, textarea {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
             font-family: Arial, sans-serif;
             color: white;
+            cursor: url('https://raw.githubusercontent.com/Xiaowameijiao/huoshishubiao.github.io/main/%E5%8E%9F%E7%A5%9E%E9%BC%A0%E6%A0%871.png'), auto;
+        }
+
+        a, button, input, select, textarea, .music-button, label, #audio-controls button {
+            cursor: url('https://raw.githubusercontent.com/Xiaowameijiao/huoshishubiao.github.io/main/%E5%8E%9F%E7%A5%9E%E9%BC%A0%E6%A0%871.png'), auto !important;
+        }
+
+        a:hover, a:focus, button:hover, button:focus, input:hover, input:focus, select:hover, select:focus, textarea:hover, textarea:focus, .music-button:hover, .music-button:focus, label:hover, label:focus, #audio-controls button:hover, #audio-controls button:focus {
+            cursor: url('https://raw.githubusercontent.com/Xiaowameijiao/huoshishubiao.github.io/main/%E5%8E%9F%E7%A5%9E%E9%BC%A0%E6%A0%871.png'), auto !important;
         }
 
         .background {
@@ -111,6 +120,11 @@
             color: #008200;
             margin: 5px; 
         }
+
+        /* 新增的 CSS 规则 */
+        .hide-cursor {
+            cursor: none !important;
+        }
     </style>
 </head>
 <body>
@@ -203,13 +217,13 @@ function addToPlaylist(name, url) {
         playCustomMusic(url);
     });
 
-    musicButtons.appendChild(newButton); // 添加到现有按钮之后
+    musicButtons.appendChild(newButton); 
 
     playlist.push(url);
 }
 
 function playCustomMusic(url) {
-    currentSongIndex = playlist.indexOf(url); // 更新当前索引为新添加音乐的索引
+    currentSongIndex = playlist.indexOf(url); 
     audioPlayer.src = url;
     audioPlayer.play();
 }
@@ -237,7 +251,7 @@ audioPlayer.addEventListener('timeupdate', function() {
 audioPlayer.addEventListener('ended', function() {
     currentSongIndex++;
     if (currentSongIndex >= playlist.length) {
-        currentSongIndex = 0; // 循环播放回到第一首歌
+        currentSongIndex = 0; 
     }
     playMusic(currentSongIndex);
 });
@@ -270,18 +284,28 @@ function toggleFullscreen() {
 function resetInactivityTimeout() {
     clearTimeout(inactivityTimeout);
     showControls();
+    document.body.classList.remove('hide-cursor');
     inactivityTimeout = setTimeout(hideControls, 5000); // 5秒
 }
 
 function hideControls() {
     musicButtons.classList.add('hidden');
     audioControls.classList.add('hidden');
+    document.body.classList.add('hide-cursor');
 }
 
 function showControls() {
     musicButtons.classList.remove('hidden');
     audioControls.classList.remove('hidden');
 }
+
+
+document.addEventListener('keydown', function(event) {
+    if (event.code === 'Space') {
+        event.preventDefault(); 
+        togglePlayPause();
+    }
+});
 
 document.addEventListener('mousemove', resetInactivityTimeout);
 document.addEventListener('keypress', resetInactivityTimeout);
